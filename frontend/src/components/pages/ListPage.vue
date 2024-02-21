@@ -2,14 +2,12 @@
   <div class="grid-container">
     <header class="header">
       <span>{{ title }}</span>
-      <template v-if="filteredSuppliers.length > 0">
-        <input
-          type="text"
-          v-model="searchTerm"
-          placeholder="Pesquisar fornecedor..."
-          @input="searchSupplier"
-        />
-      </template>
+      <input
+        type="text"
+        v-model="searchTerm"
+        placeholder="Pesquisar fornecedor..."
+        @input="searchSupplier"
+      />
     </header>
 
     <div class="table-container">
@@ -83,7 +81,7 @@ export default Vue.extend({
       loading: false,
       suppliers: [],
       currentPage: 0,
-      pageSize: 8,
+      pageSize: 5,
       searchTerm: "",
       title: "Lista de Fornecedores",
     };
@@ -114,7 +112,9 @@ export default Vue.extend({
   mounted() {
     this.loading = true;
     axios
-      .get("http://localhost:8000/api/v1/supplier?attributes=id,name,identification,situation,type,city,state")
+      .get(
+        "http://localhost:8000/api/v1/supplier?attributes=id,name,identification,situation,type,city,state"
+      )
       .then((response) => {
         this.suppliers = response.data.data;
       })
@@ -166,6 +166,11 @@ export default Vue.extend({
 
 
 <style scoped>
+.not-found {
+  display: flex;
+  justify-content: center;
+}
+
 .grid-container {
   display: flex;
   flex-direction: column;
@@ -231,12 +236,6 @@ thead {
   font-weight: 600;
   border-bottom: 1px solid var(--color-gray);
 }
-
-.not-found{
-  display: flex;
-  justify-content: center;
-}
-
 
 tbody {
   width: 100%;
