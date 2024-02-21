@@ -232,6 +232,12 @@ thead {
   border-bottom: 1px solid var(--color-gray);
 }
 
+.not-found{
+  display: flex;
+  justify-content: center;
+}
+
+
 tbody {
   width: 100%;
   display: flex;
